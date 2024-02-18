@@ -10,6 +10,7 @@ public class PlayerSizeController : MonoBehaviour
     public CinemachineFreeLook cam;
     public float initialTopRigHeight, initialTopRigRadius, initialMidRigHeight, initialMidRigRadius, initialBotRigHeight, initialBotRigRadius;
 
+    public static PlayerSizeController Instance;
 
 
 
@@ -52,10 +53,19 @@ public class PlayerSizeController : MonoBehaviour
         }
         gameObject.transform.localScale = new Vector3(size, size, size);
     }
+
+    private void Awake()
+    {
+        Instance = GetComponent<PlayerSizeController>();
+    }
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-         changeTime=0;
+       
+         changeTime =0;
     sizeBefore = gameObject.transform.localScale;
         initialTopRigHeight = cam.m_Orbits[0].m_Height;
         initialTopRigRadius = cam.m_Orbits[0].m_Radius;

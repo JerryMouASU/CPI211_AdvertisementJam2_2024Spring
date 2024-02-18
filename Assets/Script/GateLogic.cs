@@ -44,7 +44,9 @@ public class GateLogic : MonoBehaviour
     /// </summary>
     void MatTrans()
     {
+       // color = material.color;
         color.a = 0.2f;
+        material.color = color;
     }
 
 
@@ -52,14 +54,18 @@ public class GateLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         //   material = GetComponent<Renderer>().material;
         color = material.color;
+        color.a = 1f ;
+        material.color = color;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //playerSize = Player.Instance.;
+        if(PlayerSizeController.Instance!=null) playerSize = PlayerSizeController.Instance.playerSize;
+
         if (CheckIfPass(playerSize))
         {
             MatTrans();
