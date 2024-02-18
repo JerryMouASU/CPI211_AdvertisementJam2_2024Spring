@@ -41,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
         anim.SetFloat("Speed", speed);
         anim.SetBool("Grounded", isGrounded);
         anim.SetFloat("VerticalSpeed", velocity.y);
-        anim.SetBool("Pop", outofjumps);
         //jump
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
@@ -50,7 +49,6 @@ public class PlayerMovement : MonoBehaviour
             jumpHeight = defaultJumpHeight;
             amountOfJumpsSinceGrounded = 0;
             outofjumps = false;
-            anim.SetBool("Puffed", false);
         }
 
         if (isGrounded && velocity.y < 0)
@@ -60,25 +58,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && outofjumps == false)
         {
-            if (isGrounded == false)
-            {
-                if (amountOfJumpsSinceGrounded < 6)
-                {
-                    jumpHeight -= jumpAtrophy;
-                }
-                else
-                {
-                    outofjumps = true;
-                    velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
-                }
-            }
-            amountOfJumpsSinceGrounded++;
+            outofjumps = true;
+            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
             if (amountOfJumpsSinceGrounded > 0)
             {
-                anim.SetBool("Puffed", true);
                 anim.Play(anim.GetCurrentAnimatorClipInfo(0)[0].clip.name, 0, 0.0f);
             }
-            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
         }
         //gravity
         velocity.y += gravity * Time.deltaTime;
