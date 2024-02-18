@@ -556,7 +556,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772537357}
-  m_LocalRotation: {x: 0.07912957, y: -0.0000000042881068, z: 3.4038333e-10, w: 0.9968644}
+  m_LocalRotation: {x: 0.07912957, y: 0.0000000042881076, z: -3.403834e-10, w: 0.9968644}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1058,11 +1058,11 @@ MonoBehaviour:
   controller: {fileID: 1538798082}
   cam: {fileID: 1095243690}
   anim: {fileID: 1579183832}
-  acceleration: 15
+  acceleration: 30
   decelerationconstant: 5
   maxspeed: 20
-  gravity: -14.715
-  defaultJumpHeight: 3
+  gravity: -19.62
+  defaultJumpHeight: 4
   jumpAtrophy: 0.5
   groundCheck: {fileID: 1717140121}
   groundDistance: 0.5
