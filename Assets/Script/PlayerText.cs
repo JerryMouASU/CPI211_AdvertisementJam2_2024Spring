@@ -21,6 +21,7 @@ public class PlayerText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (target != null && tagText != null)
         {
             Vector3 screenPos = Camera.main.WorldToScreenPoint(target.position + Mathf.Pow(PlayerSizeController.Instance.playerSize,1.0f/3.0f )* offset);
