@@ -14,7 +14,7 @@ public class Collectable : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log(" HEY");
+        //Debug.Log(" HEY");
         if (collision.gameObject.CompareTag("Player")) {
             PlayerSizeController.Instance.ChangeSize(sizeChangeAmount);
             Destroy(this.gameObject);
