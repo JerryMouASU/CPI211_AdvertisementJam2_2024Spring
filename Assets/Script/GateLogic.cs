@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GateLogic : MonoBehaviour
 {
     [SerializeField] private int sizeTarget;
     [SerializeField] private bool biggerOrEqual = true;
     private int playerSize;
+    public TextMeshPro text;
 
-
-    [SerializeField] private Material material;
+    private Material material;
     private Color color;
 
 
@@ -44,19 +45,34 @@ public class GateLogic : MonoBehaviour
     /// </summary>
     void MatTrans()
     {
-       // color = material.color;
         color.a = 0.2f;
         material.color = color;
     }
-
+    /// <summary>
+    /// Make the material Opaque
+    /// </summary>
+    void MatOpaque()
+    {
+        color.a = 1f;
+        material.color = color;
+    }
 
 
     // Start is called before the first frame update
     void Start()
     {
-
-        //   material = GetComponent<Renderer>().material;
-        color = material.color;
+        material = GetComponent<Renderer>().materials[1];
+        switch (biggerOrEqual)
+        {
+            case true:
+                text.text = ">=" + sizeTarget;
+                color = Color.green;
+                break;
+            case false:
+                text.text = "<=" + sizeTarget;
+                color = Color.red;
+                break;
+        }
         color.a = 1f ;
         material.color = color;
     }
@@ -71,6 +87,12 @@ public class GateLogic : MonoBehaviour
             MatTrans();
             Collider s = GetComponent<Collider>();
             s.enabled = false;
+        }
+        else
+        {
+            MatOpaque();
+            Collider s = GetComponent<Collider>();
+            s.enabled = true;
         }
     }
 }

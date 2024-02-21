@@ -6,6 +6,7 @@ public class CatController : MonoBehaviour
 {
     private NavMeshAgent agent;
     public GameObject particleEffectPrefab;
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +30,13 @@ public class CatController : MonoBehaviour
                 }
             }
         }
-
+        if (Vector3.Distance(transform.position,agent.destination) > 0.1)
+        {
+            anim.SetFloat("Speed", 1);
+        }
+        else
+        {
+            anim.SetFloat("Speed", 0);
+        }
     }
 }

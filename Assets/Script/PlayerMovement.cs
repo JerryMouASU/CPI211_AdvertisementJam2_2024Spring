@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Security.Cryptography;
 using System.Threading;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         lastdirection = currentdirection;
-        anim.SetFloat("Speed", speed);
+        anim.SetFloat("Speed", Mathf.Clamp(speed,0,speed));
         anim.SetBool("Grounded", isGrounded);
         anim.SetFloat("VerticalSpeed", velocity.y);
         //jump
@@ -59,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && outofjumps == false)
         {
             outofjumps = true;
-            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+            velocity.y = Mathf.Sqrt(jumpHeight * transform.localScale.x * -2 * gravity);
             if (amountOfJumpsSinceGrounded > 0)
             {
                 anim.Play(anim.GetCurrentAnimatorClipInfo(0)[0].clip.name, 0, 0.0f);
@@ -94,6 +95,18 @@ public class PlayerMovement : MonoBehaviour
                 speed -= acceleration * decelerationconstant * Time.deltaTime;
                 controller.Move(lastdirection.normalized * speed * Time.deltaTime);
             }
+        }
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            this.GetComponent<PlayerSizeController>().cam.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "";
+            this.GetComponent<PlayerSizeController>().cam.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "";
+            this.GetComponent<PlayerSizeController>().cam.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisValue = 0;
+            this.GetComponent<PlayerSizeController>().cam.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisValue = 0;
+        }
+        else
+        {
+            this.GetComponent<PlayerSizeController>().cam.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Mouse X";
+            this.GetComponent<PlayerSizeController>().cam.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Mouse Y";
         }
     }
 }
