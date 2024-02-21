@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 velocity;
     Vector3 lastdirection, currentdirection;
-    bool isGrounded, outofjumps;
+    bool isGrounded;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -56,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpHeight = defaultJumpHeight;
             amountOfJumpsSinceGrounded = 0;
-            outofjumps = false;
             spawnLocation = transform.position;
         }
 
@@ -65,9 +64,8 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
-        if (Input.GetButtonDown("Jump") && outofjumps == false)
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            outofjumps = true;
             velocity.y = Mathf.Sqrt(jumpHeight * transform.localScale.x * -2 * gravity);
             if (amountOfJumpsSinceGrounded > 0)
             {
