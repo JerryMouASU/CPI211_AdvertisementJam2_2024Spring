@@ -35,6 +35,13 @@ public class PlayerMovement : MonoBehaviour
     float turnSmoothVelocity;
     public float turnSmoothTime = 0.1f;
 
+    private Vector3 spawnLocation;
+
+    private void Start()
+    {
+        spawnLocation = transform.position;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -108,5 +115,8 @@ public class PlayerMovement : MonoBehaviour
             this.GetComponent<PlayerSizeController>().cam.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Mouse X";
             this.GetComponent<PlayerSizeController>().cam.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Mouse Y";
         }
+
+
+        if (transform.position.y < -30) transform.position = spawnLocation;
     }
 }
