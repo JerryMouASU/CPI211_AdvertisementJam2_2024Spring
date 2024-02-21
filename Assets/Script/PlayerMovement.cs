@@ -57,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
             jumpHeight = defaultJumpHeight;
             amountOfJumpsSinceGrounded = 0;
             outofjumps = false;
+            spawnLocation = transform.position;
         }
 
         if (isGrounded && velocity.y < 0)
