@@ -22,10 +22,14 @@ public class CatController : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit)) 
             {
-                if (agent.SetDestination(hit.point)) {
+                if (hit.collider.gameObject.layer == 6)
+                {
+                    if (agent.SetDestination(hit.point))
+                    {
 
-                    Instantiate(particleEffectPrefab, hit.point, Quaternion.identity);
-                    //get 
+                        Instantiate(particleEffectPrefab, hit.point, Quaternion.identity);
+                        //get 
+                    }
                 }
             }
         }

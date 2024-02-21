@@ -11,7 +11,7 @@ public class PlayerSizeController : MonoBehaviour
     public float initialTopRigHeight, initialTopRigRadius, initialMidRigHeight, initialMidRigRadius, initialBotRigHeight, initialBotRigRadius;
 
     public static PlayerSizeController Instance;
-
+    public PlayerMovement pMove;
 
 
 
@@ -29,6 +29,8 @@ public class PlayerSizeController : MonoBehaviour
 
         changeTime = 0;
         sizeBefore = gameObject.transform.localScale;
+        float size = Mathf.Pow((float)playerSize, 1.0f / 3.0f);
+        pMove.jumpHeight = pMove.defaultJumpHeight * size;
         StartCoroutine(UpdatePlayerSize());
     }
 
@@ -37,7 +39,7 @@ public class PlayerSizeController : MonoBehaviour
 
     public IEnumerator UpdatePlayerSize() {
         float size= Mathf.Pow((float)playerSize, 1.0f/3.0f);
-        Debug.Log(size);
+    //    Debug.Log(size);
         while (Vector3.Distance(transform.localScale, new Vector3(size,size,size)) > 0.001){
             gameObject.transform.localScale = Vector3.Lerp(sizeBefore, new Vector3(size, size, size), changeTime);
             //Changes Camera Distances
@@ -64,8 +66,8 @@ public class PlayerSizeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
-         changeTime =0;
+        pMove = GetComponent<PlayerMovement>();
+          changeTime =0;
     sizeBefore = gameObject.transform.localScale;
         initialTopRigHeight = cam.m_Orbits[0].m_Height;
         initialTopRigRadius = cam.m_Orbits[0].m_Radius;

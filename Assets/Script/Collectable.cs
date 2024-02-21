@@ -13,7 +13,7 @@ public class Collectable : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log(" HEY");
+    //    Debug.Log(" HEY");
         if (collision.gameObject.CompareTag("Player")) {
             PlayerSizeController.Instance.ChangeSize(sizeChangeAmount);
             Destroy(this.gameObject);
@@ -29,6 +29,7 @@ public class Collectable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        target.eulerAngles += 100*Vector3.up*Time.deltaTime;
         if (target != null && tagText != null)
         {
             Vector3 screenPos = Camera.main.WorldToScreenPoint(target.position + Mathf.Pow(PlayerSizeController.Instance.playerSize, 1.0f / 3.0f) * offset);

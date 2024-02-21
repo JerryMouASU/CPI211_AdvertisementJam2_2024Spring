@@ -19,10 +19,10 @@ public class PlayerMovement : MonoBehaviour
 
     public float gravity = -9.81f;
     public float defaultJumpHeight = 3;
-    float jumpHeight = 0;
+    public float jumpHeight = 0;
     float amountOfJumpsSinceGrounded;
     public float jumpAtrophy;
-
+    private Vector3 spawnLocation;
     Vector3 velocity;
     Vector3 lastdirection, currentdirection;
     bool isGrounded, outofjumps;
@@ -34,6 +34,11 @@ public class PlayerMovement : MonoBehaviour
     float turnSmoothVelocity;
     public float turnSmoothTime = 0.1f;
 
+    private void Start()
+    {
+        spawnLocation = transform.position;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -44,9 +49,11 @@ public class PlayerMovement : MonoBehaviour
         //jump
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
+
+
         if (isGrounded == true)
         {
-            jumpHeight = defaultJumpHeight;
+            jumpHeight = defaultJumpHeight* Mathf.Pow((float)PlayerSizeController.Instance.playerSize, 1.0f / 3.0f);
             amountOfJumpsSinceGrounded = 0;
             outofjumps = false;
         }
@@ -95,5 +102,7 @@ public class PlayerMovement : MonoBehaviour
                 controller.Move(lastdirection.normalized * speed * Time.deltaTime);
             }
         }
+
+        if (transform.position.y < -30) transform.position = spawnLocation;
     }
 }

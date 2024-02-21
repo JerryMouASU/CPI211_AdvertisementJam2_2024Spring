@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GateLogic : MonoBehaviour
@@ -7,7 +8,7 @@ public class GateLogic : MonoBehaviour
     [SerializeField] private int sizeTarget;
     [SerializeField] private bool biggerOrEqual = true;
     private int playerSize;
-
+    public TextMeshPro sign;
 
     [SerializeField] private Material material;
     private Color color;
@@ -31,7 +32,7 @@ public class GateLogic : MonoBehaviour
         }
         else
         {
-            if (playerS <= sizeTarget)
+            if (playerS < sizeTarget)
             {
                 return true;
             }
@@ -54,7 +55,8 @@ public class GateLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        if (biggerOrEqual) sign.text = "¡Ý" + sizeTarget;
+        else sign.text = "<" + sizeTarget;
         //   material = GetComponent<Renderer>().material;
         color = material.color;
         color.a = 1f ;
